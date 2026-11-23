@@ -1,0 +1,266 @@
+/* Design tokens, theme, reset and base typography */
+
+:root {
+  color-scheme: light;
+
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  --bg: #f4f7f8;
+  --bg-glow: #e8f1ef;
+  --surface: #ffffff;
+  --surface-2: #f7faf9;
+  --surface-3: #eef3f2;
+  --text: #142029;
+  --text-muted: #5b6f7b;
+  --text-faint: #8598a3;
+  --border: #e1e9e7;
+  --border-strong: #cbd8d5;
+
+  --primary: #0d7a63;
+  --primary-strong: #095a49;
+  --primary-soft: #e4f3ef;
+  --primary-contrast: #ffffff;
+
+  --income: #0f8a5f;
+  --income-soft: #e5f6ee;
+  --expense: #cc4a54;
+  --expense-soft: #fdecee;
+  --warning: #a85a08;
+  --warning-soft: #fdf2e2;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+
+  --balance: #0b3d34;
+  --balance-text: #ffffff;
+  --balance-muted: #a9cfc6;
+
+  --ring: 0 0 0 3px rgba(13, 122, 99, 0.28);
+  --shadow-sm: 0 1px 2px rgba(17, 39, 34, 0.06);
+  --shadow-md: 0 12px 30px -18px rgba(17, 39, 34, 0.35);
+  --shadow-lg: 0 28px 60px -28px rgba(17, 39, 34, 0.45);
+
+  --radius-sm: 9px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --sidebar-w: 248px;
+  --topbar-h: 76px;
+  --bottom-nav-h: 64px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 56px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --speed: 180ms;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0a1218;
+  --bg-glow: #0d1d22;
+  --surface: #101c24;
+  --surface-2: #14232c;
+  --surface-3: #1a2d38;
+  --text: #e8f0f4;
+  --text-muted: #9db1bc;
+  --text-faint: #748c99;
+  --border: #21343f;
+  --border-strong: #2e4754;
+
+  --primary: #4cc9ab;
+  --primary-strong: #7ee0c9;
+  --primary-soft: #11322b;
+  --primary-contrast: #06231c;
+
+  --income: #4fd6a0;
+  --income-soft: #0f2c22;
+  --expense: #f0808a;
+  --expense-soft: #33191d;
+  --warning: #f0b45b;
+  --warning-soft: #332611;
+  --danger: #ff9a94;
+  --danger-soft: #351a1a;
+
+  --balance: #0e332d;
+  --balance-text: #f2fbf8;
+  --balance-muted: #a6cfc5;
+
+  --ring: 0 0 0 3px rgba(76, 201, 171, 0.3);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 16px 34px -20px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 30px 70px -30px rgba(0, 0, 0, 0.85);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.35rem, 1.1rem + 0.7vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+}
+
+h2 {
+  font-size: 1.05rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 650;
+}
+
+h3 {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+a {
+  color: var(--primary);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+small {
+  font-size: 0.8rem;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--primary-soft);
+  color: var(--text);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  transition: top var(--speed) var(--ease);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.faint {
+  color: var(--text-faint);
+}
+
+.income-text {
+  color: var(--income);
+}
+
+.expense-text {
+  color: var(--expense);
+}
+
+.negative {
+  color: var(--expense);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

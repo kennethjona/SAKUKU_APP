@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b3d34" />
+  <meta name="description" content="Money Tracker — pencatat keuangan pribadi dan aktivitas jalan-jalan. Data tersimpan lokal di browser." />
+  <title>Money Tracker — Keuangan Pribadi</title>
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/repair.css" />
+  <script>
+    /* Mirror the theme for first paint only; financial data stays in IndexedDB. */
+    try {
+      var cachedTheme = localStorage.getItem("mt_theme");
+      if (cachedTheme === "dark" || cachedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", cachedTheme);
+      }
+    } catch (error) { /* private mode without localStorage: fall back to light */ }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigasi samping">
+      <a class="brand" href="#/beranda">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="6" width="19" height="13" rx="3" />
+            <path d="M2.5 10.5h19" />
+            <circle cx="16.5" cy="15" r="1.2" fill="currentColor" stroke="none" />
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>Money Tracker</strong>
+          <span>Keuangan pribadi</span>
+        </span>
+      </a>
+
+      <p class="nav-label">Menu</p>
+      <nav class="nav" id="sideNav" aria-label="Navigasi utama"></nav>
+
+      <div class="sidebar-foot">
+        <strong>Data lokal</strong>
+        Tersimpan di browser ini. Buat cadangan berkala dari halaman Pengaturan.
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="topbar-title">
+          <p class="eyebrow" id="pageEyebrow">Ringkasan</p>
+          <h1 id="pageTitle">Beranda</h1>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="month-switcher" id="monthSwitcher" role="group" aria-label="Pilih bulan">
+            <button class="icon-btn" id="prevMonth" type="button" aria-label="Bulan sebelumnya">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+            </button>
+            <span class="month-switcher-label" id="monthLabel">—</span>
+            <button class="icon-btn" id="nextMonth" type="button" aria-label="Bulan berikutnya">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+            </button>
+          </div>
+
+          <button class="btn btn-primary" id="quickAddBtn" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+            <span class="btn-label">Transaksi</span>
+          </button>
+
+          <a class="icon-btn" id="settingsLink" href="#/pengaturan" aria-label="Buka pengaturan" title="Pengaturan">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.65 8.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.54a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09c0 .66.4 1.26 1.03 1.56a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.46 9c.3.62.9 1.03 1.56 1.03H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15Z" />
+            </svg>
+          </a>
+
+          <button class="icon-btn" id="themeToggle" type="button" aria-label="Ganti tema terang atau gelap" title="Ganti tema">
+            <svg id="themeIcon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="view" id="main" tabindex="-1">
+        <div class="empty" role="status">
+          <strong>Memuat data keuangan…</strong>
+          <p>Menyiapkan penyimpanan lokal.</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <nav class="bottom-nav" id="bottomNav" aria-label="Navigasi utama seluler"></nav>
+
+  <div class="toast-root" id="toastRoot" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <div class="card" style="margin: 24px;">
+      <h2>JavaScript diperlukan</h2>
+      <p>Aplikasi ini membutuhkan JavaScript untuk mencatat dan menghitung keuangan. Aktifkan JavaScript lalu muat ulang halaman.</p>
+    </div>
+  </noscript>
+
+  <dialog id="transactionDialog" class="mt-dialog" aria-label="Formulir transaksi"></dialog>
+  <input type="file" id="importBackupInput" accept=".json,application/json" hidden />
+  <script>
+    // An ES-module failure otherwise leaves the static loading placeholder forever.
+    // Warn explicitly for file://, which blocks module imports in common browsers.
+    (function () {
+      function showLoaderFailure() {
+        const main = document.getElementById('main');
+        if (!main || !main.textContent.includes('Memuat data keuangan')) return;
+        const isFile = location.protocol === 'file:';
+        main.innerHTML = '<section class="card error-panel" role="alert">' +
+          '<div class="error-icon">!</div>' +
+          '<h2>' + (isFile ? 'Buka aplikasi melalui localhost' : 'Aplikasi gagal dimuat') + '</h2>' +
+          '<p>' + (isFile ? 'Browser memblokir JavaScript module ketika halaman dibuka langsung sebagai file:///.' :
+            'JavaScript utama gagal dimuat. Periksa Console (F12), lalu pastikan semua file JavaScript ada.') + '</p>' +
+          '<p class="muted">Buka terminal di folder money-tracker-v1, jalankan <code>py -m http.server 5500 --bind 127.0.0.1</code>, kemudian buka <code>http://127.0.0.1:5500/</code>.</p>' +
+          '<button class="btn btn-primary" type="button" onclick="location.reload()">Coba lagi</button></section>';
+      }
+      window.addEventListener('DOMContentLoaded', function () {
+        if (location.protocol === 'file:') showLoaderFailure();
+        else setTimeout(showLoaderFailure, 7000);
+      });
+    })();
+  </script>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

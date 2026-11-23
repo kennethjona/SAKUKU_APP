@@ -1,0 +1,194 @@
+/* Breakpoint-specific refinements. Base styles live in layout/components. */
+
+.mobile-only {
+  display: none;
+}
+
+@media (min-width: 1440px) {
+  .view {
+    max-width: 1320px;
+    padding-top: 38px;
+  }
+
+  .grid-main {
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .topbar-actions .btn-label {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .mobile-only {
+    display: inline-grid;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .app-shell {
+    display: block;
+  }
+
+  .topbar-title h1 {
+    font-size: 1.2rem;
+  }
+
+  .balance-foot {
+    gap: 10px 18px;
+  }
+
+  .outing-grid {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .outing-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .settings-grid {
+    gap: 12px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+  }
+
+  .page-head-actions {
+    width: 100%;
+  }
+
+  .page-head-actions .btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 14.5px;
+  }
+
+  .view {
+    padding-left: 13px;
+    padding-right: 13px;
+    gap: 12px;
+  }
+
+  .stack {
+    gap: 14px;
+  }
+
+  .balance-card {
+    border-radius: 16px;
+  }
+
+  .balance-amount {
+    font-size: clamp(1.75rem, 8vw, 2.2rem);
+  }
+
+  .balance-foot {
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+
+  .balance-foot > div {
+    flex: 1 1 40%;
+  }
+
+  .stat-card {
+    min-height: 102px;
+    padding: 13px 14px;
+  }
+
+  .stat-value {
+    font-size: 1.18rem;
+  }
+
+  .section-head {
+    align-items: flex-start;
+  }
+
+  .dialog-foot .btn {
+    flex: 1;
+  }
+
+  .dialog-foot .spacer {
+    display: none;
+  }
+
+  .dialog-foot .btn-danger {
+    flex-basis: 100%;
+  }
+
+  .form-actions .btn {
+    flex: 1;
+  }
+
+  .form-actions .spacer {
+    display: none;
+  }
+
+  .outing-actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .legend-amount {
+    font-size: 0.75rem;
+  }
+
+  .toolbar-actions .btn {
+    flex: 1;
+  }
+
+  .toolbar {
+    gap: 8px;
+  }
+
+  .toolbar .field {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .topbar {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .view {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .tx-amount {
+    font-size: 0.8rem;
+  }
+
+  .tx-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .balance-scope {
+    display: none;
+  }
+
+  .settings-row {
+    align-items: flex-start;
+  }
+}
+
+/* Touch devices: avoid hover-only affordances and keep targets comfortable */
+@media (hover: none) {
+  .tx-actions .icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+}
